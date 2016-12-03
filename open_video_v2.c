@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <cv.h>
 #include <highgui.h>
 
@@ -15,8 +16,7 @@ int main(int argc, const char *argv[])
 {
     cvNamedWindow(WIN_NAME, CV_WINDOW_AUTOSIZE);
     g_capture = cvCaptureFromFile(argv[1]);
-    int frames = (int) cvGetCaptureProperty(g_capture, CV_CAP_PROP_FRAME_COUNT);
-    double fps = cvGetCaptureProperty(g_capture, CV_CAP_PROP_FPS);
+    int frames = (int) 1000 / 60;
 
     if (frames != 0)
     {
@@ -37,7 +37,7 @@ int main(int argc, const char *argv[])
         if (! frame) break;
         cvShowImage(WIN_NAME, frame);
 
-        char c = cvWaitKey(33);
+        char c = cvWaitKey(1000.0 / 60);
         if (c == 27) break;
     }
 
